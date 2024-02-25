@@ -28,7 +28,7 @@ const Modal = ({ isOpen, onClose, onSave, initialContent, initialGrade }) => {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Modify Review</h5>
+                <h5 className="modal-title">리뷰 수정</h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -39,7 +39,7 @@ const Modal = ({ isOpen, onClose, onSave, initialContent, initialGrade }) => {
               </div>
               <div className="modal-body">
                 <div>
-                  <label htmlFor="content">Content:</label>
+                  <label htmlFor="content">내용:</label>
                   <textarea
                     id="content"
                     value={content}
@@ -47,7 +47,7 @@ const Modal = ({ isOpen, onClose, onSave, initialContent, initialGrade }) => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="grade">Grade:</label>
+                  <label htmlFor="grade">평점:</label>
                   <input
                     type="number"
                     id="grade"
@@ -58,10 +58,10 @@ const Modal = ({ isOpen, onClose, onSave, initialContent, initialGrade }) => {
               </div>
               <div className="modal-footer">
                 <button type="button" onClick={handleClose}>
-                  Close
+                  닫기
                 </button>
                 <button type="button" onClick={handleSave}>
-                  Save changes
+                  변경 사항 저장
                 </button>
               </div>
             </div>

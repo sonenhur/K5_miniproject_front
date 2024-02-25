@@ -18,7 +18,7 @@ export default function Register() {
         password.trim() === "" ||
         birth.trim() === ""
       ) {
-        alert("Email address, password, name and birth cannot be empty!");
+        alert("이메일 주소, 비밀번호, 이름 및 생년월일은 필수 항목입니다");
         return;
       }
 
@@ -38,13 +38,13 @@ export default function Register() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to register.");
+        throw new Error(errorData.error || "가입에 실패했습니다.");
       }
 
       navigate("/Login"); // 회원가입 성공 시 로그인 페이지로 이동합니다.
     } catch (error) {
-      console.error("Registration failed:", error.message);
-      setError(error.message || "Registration failed. Please try again later.");
+      console.error("가입 실패:", error.message);
+      setError(error.message || "가입에 실패했습니다. 다시 시도해주세요.");
     } finally {
       setLoading(false);
     }

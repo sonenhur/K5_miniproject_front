@@ -21,14 +21,13 @@ export default function LoginForm() {
   const handleSubmit = () => {
     console.log("id: ", inputId, "pw: ", inputPw);
 
-
-    // email과 password가 빈칸인지 확인
+    // 이메일과 비밀번호가 빈 칸인지 확인
     if (inputId.trim() === "" || inputPw.trim() === "") {
-      alert("Email address and password cannot be empty!");
+      alert("이메일 주소와 비밀번호를 입력하세요!");
       return;
     }
 
-    // fetch('http://10.125.121.181:8080/member/login', {
+    // 서버로 로그인 요청을 보냄
     fetch("http://localhost:8080/member/login", {
       method: "POST",
       headers: {
@@ -40,21 +39,18 @@ export default function LoginForm() {
       }),
     })
       .then((res) => {
-        // 서버의 DB랑 비교해서 서버에서 에러를 전달해주면
+        // 서버로부터 응답 받음
         if (res.ok) {
           setIsLogin(true);
           localStorage.setItem("loginToken", res.headers.get("Authorization"));
-          // home page로 이동
+          // 홈 페이지로 이동
           navigate("/");
         } else {
-          alert("Invalid email and password");
+          alert("유효하지 않은 이메일 또는 비밀번호입니다.");
         }
-        // 서버에서 에러가 안났을때
-        // 이메일, 비밀번호를 입력해서 로그인 상태가 true가 되면
       })
       .catch((err) => console.log(err));
   };
-
 
   return (
     <div className="flex h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-black">
@@ -65,7 +61,7 @@ export default function LoginForm() {
           </h1>
         </Link>
         <h2 className="mt-5 text-center text-2xl font-semibold leading-9 tracking-tight text-white">
-          Sign in to your account
+          계정으로 로그인
         </h2>
       </div>
 
@@ -76,7 +72,7 @@ export default function LoginForm() {
               htmlFor="email"
               className="block text-base font-medium leading-6 text-white"
             >
-              Email address
+              이메일 주소
             </label>
             <div className="mt-2">
               <input
@@ -85,7 +81,7 @@ export default function LoginForm() {
                 type="email"
                 autoComplete="email"
                 required
-                placeholder="name@company.com"
+                placeholder="name@email.com"
                 value={inputId}
                 onChange={handleInputId}
                 className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
@@ -99,11 +95,11 @@ export default function LoginForm() {
                 htmlFor="password"
                 className="block text-base font-medium leading-6 text-white"
               >
-                Password
+                비밀번호
               </label>
               <div className="text-sm">
                 <a className="font-normal text-red-400 hover:text-red-400">
-                  Forgot password?
+                  비밀번호를 잊으셨나요?
                 </a>
               </div>
             </div>
@@ -127,24 +123,24 @@ export default function LoginForm() {
               onClick={handleSubmit}
               className="flex w-full justify-center rounded-md bg-red-400 px-3 py-2 text-base font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
             >
-              Login
+              로그인
             </button>
           </div>
         </form>
         <div className="mt-10 text-center text-sm text-gray-500">
-          Not a member?
+          아직 회원이 아니신가요?
           <Link
             to="/Register"
             className="font-semibold leading-6 text-red-400 hover:text-red-400 ml-2 hover:underline"
           >
-            Sign up
+            가입하기
           </Link>
           <div className="text-base mt-5">
-            --------------------------- or ---------------------------
+            ------------------------- or -------------------------
           </div>
           <div className="flex justify-center items-center mt-5">
             <div className="text-lg text-gray-400 font-medium mr-3">
-              Sign in with
+              다음으로 로그인
             </div>
             <div className="flex justify-center items-center w-10 h-10 rounded-full bg-gray-500 mr-5">
               <svg

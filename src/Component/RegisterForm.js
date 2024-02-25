@@ -32,7 +32,7 @@ export default function RegisterForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setPasswordError("Confirmed password is wrong");
+      setPasswordError("확인된 비밀번호가 일치하지 않습니다");
       return;
     }
     setPasswordError("");
@@ -51,7 +51,7 @@ export default function RegisterForm({ onSubmit }) {
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-5 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-3xl font-bold leading-tight tracking-tight text-red-400 md:text-2xl mb-2">
-              Create an account
+              계정 만들기
             </h1>
             <form className="space-y-2 md:space-y-3" onSubmit={handleSubmit}>
               <div>
@@ -59,7 +59,7 @@ export default function RegisterForm({ onSubmit }) {
                   htmlFor="email"
                   className="block mb-2 text-base font-medium text-gray-900 "
                 >
-                  Your email
+                  이메일 주소
                 </label>
                 <input
                   type="email"
@@ -77,7 +77,7 @@ export default function RegisterForm({ onSubmit }) {
                   htmlFor="password"
                   className="block mb-2 text-base font-medium text-gray-900"
                 >
-                  Password
+                  비밀번호
                 </label>
                 <input
                   type="password"
@@ -95,7 +95,7 @@ export default function RegisterForm({ onSubmit }) {
                   htmlFor="confirm-password"
                   className="block mb-2 text-base font-medium text-gray-900"
                 >
-                  Confirm password
+                  비밀번호 확인
                 </label>
                 <input
                   type="password"
@@ -113,7 +113,7 @@ export default function RegisterForm({ onSubmit }) {
                   htmlFor="name"
                   className="block mb-2 text-base font-medium black"
                 >
-                  Your name
+                  이름
                 </label>
                 <input
                   type="text"
@@ -122,7 +122,7 @@ export default function RegisterForm({ onSubmit }) {
                   value={name}
                   onChange={handleName}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="name"
+                  placeholder="이름"
                   required=""
                 />
               </div>
@@ -131,7 +131,7 @@ export default function RegisterForm({ onSubmit }) {
                   htmlFor="birth"
                   className="block mb-2 text-base font-medium text-gray-900"
                 >
-                  Your birth
+                  생년월일
                 </label>
                 <input
                   type="date"
@@ -156,13 +156,13 @@ export default function RegisterForm({ onSubmit }) {
                 </div>
                 <div className="ml-3 text-sm">
                   <label htmlFor="terms" className="font-light text-gray-500">
-                    I accept the{" "}
                     <a
-                      className="font-medium text-primary-600 hover:underline"
+                      className="font-medium text-primary-600 underline hover:underline"
                       href="#"
                     >
-                      Terms and Conditions
-                    </a>
+                      약관과 조건
+                    </a>{""}
+                    에 동의합니다
                   </label>
                 </div>
               </div>
@@ -175,15 +175,15 @@ export default function RegisterForm({ onSubmit }) {
                 type="submit"
                 className="w-full text-white bg-red-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-base px-5 py-2.5 text-center"
               >
-                Sign up
+                가입하기
               </button>
               <p className="text-sm font-light text-gray-500 ">
-                Already have an account?{" "}
+                이미 계정이 있으신가요?{" "}
                 <Link
                   to="/Login"
-                  className="font-medium text-primary-600 hover:underline"
+                  className="font-medium text-primary-600 underline hover:underline"
                 >
-                  Login here
+                  여기서 로그인하세요
                 </Link>
               </p>
             </form>

@@ -13,6 +13,7 @@ export default function Login() {
   };
 
   useEffect(() => {
+    // 로컬 스토리지에서 로그인 토큰을 확인하고, 로그인 상태 업데이트
     const loginToken = localStorage.getItem("loginToken");
     if (loginToken) {
       setIsLogin(true);
@@ -20,26 +21,27 @@ export default function Login() {
   }, [setIsLogin]);
 
   const handleLogout = () => {
+    // 로그아웃 처리: 로컬 스토리지에서 토큰 제거 및 로그인 상태 업데이트
     localStorage.removeItem("loginToken");
     setIsLogin(false);
-    navigate("/Login");
+    navigate("/Login"); // 로그인 페이지로 이동
   };
 
   return (
     <div>
-      {isLogin ? ( //로그인이 되면(isLogin이 true가 되면) Logout 버튼 생성
+      {isLogin ? ( // 로그인 상태일 때 로그아웃 버튼 표시
         <button
           className="block lg:inline-block p-1.5 mr-3 border rounded text-lg font-appleB text-white border-white hover:text-red-400 hover:bg-white"
           onClick={handleLogout}
         >
-          Logout
+          로그아웃
         </button>
       ) : (
-        <button //  로그인이 안된 상태이면(isLogin이 false가 되면) Loginform 페이지 띄우기
+        <button // 로그아웃 상태일 때 로그인 페이지로 이동하는 버튼 표시
           className="block lg:inline-block p-1.5 mr-3 border rounded text-lg font-appleB text-white border-white hover:text-red-400 hover:bg-white"
           onClick={navigateToLogin}
         >
-          Login
+          로그인
         </button>
       )}
     </div>

@@ -65,7 +65,6 @@ export default function MovieDetail() {
   };
 
   const getDbMovie = (id) => {
-    // fetch(`http://10.125.121.181:8080/movie/${id}`, {
     fetch(`http://localhost:8080/movie/${id}`, {
       method: "GET",
     })
@@ -75,7 +74,6 @@ export default function MovieDetail() {
   };
 
   const getDbReview = (movieId) => {
-    // fetch(`http://10.125.121.181:8080/movie/review/${movieId}`, {
     fetch(`http://localhost:8080/movie/review/${movieId}`, {
       method: "GET",
     })
@@ -92,9 +90,9 @@ export default function MovieDetail() {
     getDbReview(id);
   }, [param]);
 
-  const [rating, setRating] = useState([]); // rating을 빈 배열로 초기화 할 것
+  const [rating, setRating] = useState([]);
   const handleRating = (idx, selectedRating) => {
-    const newRating = [...rating]; // [...rating]는 전개 연산자를 이용하여 배열 rating의 모든 요소를 새로운 배열에 복사하는 것
+    const newRating = [...rating];
     newRating[idx] = selectedRating;
     setRating(newRating);
   };
@@ -143,7 +141,6 @@ export default function MovieDetail() {
   };
 
   const onSubmit = (reviewId) => {
-    // fetch(`http://10.125.121.181:8080/movie/review/${reviewId}`, {
     fetch(`http://localhost:8080/movie/review/${reviewId}`, {
       method: "PUT",
       headers: {
@@ -162,7 +159,6 @@ export default function MovieDetail() {
   };
 
   const handleDelete = (reviewId) => {
-    // fetch(`http://10.125.121.181:8080/movie/review/${reviewId}`, {
     fetch(`http://localhost:8080/movie/review/${reviewId}`, {
       method: "DELETE",
       headers: {
@@ -180,7 +176,6 @@ export default function MovieDetail() {
   };
 
   const handleInsert = () => {
-    // fetch(`http://10.125.121.181:8080/movie/review/1`, {
     fetch(`http://localhost:8080/movie/review/1`, {
       method: "POST",
       headers: {
@@ -197,10 +192,9 @@ export default function MovieDetail() {
       .then(window.location.reload())
       .catch((err) => console.error(err));
   };
-  const [sortedReviews, setSortedReviews] = useState([]); // 정렬된 리뷰 목록을 저장할 상태
-  const [sortBy, setSortBy] = useState(""); // 등급 or 날짜
+  const [sortedReviews, setSortedReviews] = useState([]);
+  const [sortBy, setSortBy] = useState("");
 
-  // 등급 또는 날짜에 따라 리뷰를 정렬하는 함수
   const sortReviews = (reviews) => {
     if (sortBy === "grade") {
       return reviews.slice().sort((a, b) => a.grade - b.grade);
@@ -213,27 +207,22 @@ export default function MovieDetail() {
     }
   };
 
-  // 등급 또는 날짜에 따라 정렬 기준을 변경하는 함수
   const handleSortBy = (criteria) => {
     setSortBy(criteria);
   };
 
   useEffect(() => {
-    // 기존의 리뷰를 정렬하여 저장
     setSortedReviews(sortReviews(dbReview));
-  }, [dbReview, sortBy]); // dbReview 또는 sortBy가 변경될 때마다 useEffect 실행
+  }, [dbReview, sortBy]);
 
   const [orderBy, setOrderBy] = useState("asc");
   const handleSortReviews = (orderBy) => {
-    // 정렬 방식에 따라 리뷰를 정렬하는 로직을 구현합니다.
     if (orderBy === "asc") {
-      // 오름차순으로 정렬하는 로직
       const sortedReviewsAsc = [...sortedReviews].sort(
         (a, b) => a.grade - b.grade
       );
       setSortedReviews(sortedReviewsAsc);
     } else {
-      // 내림차순으로 정렬하는 로직
       const sortedReviewsDesc = [...sortedReviews].sort(
         (a, b) => b.grade - a.grade
       );
@@ -292,7 +281,7 @@ export default function MovieDetail() {
                 등록
               </Button>
               <Dialog open={openInsert} onClose={handleClose}>
-                <DialogTitle>Insert</DialogTitle>
+                <DialogTitle>등록</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
                     등록할 내용을 작성해주세요
@@ -312,7 +301,7 @@ export default function MovieDetail() {
                     margin="dense"
                     id="content"
                     name="content"
-                    label="New Content"
+                    label="새로운 내용"
                     type="text"
                     fullWidth
                     variant="standard"
@@ -324,7 +313,7 @@ export default function MovieDetail() {
                     margin="dense"
                     id="grade"
                     name="grade"
-                    label="New Grade"
+                    label="새로운 등급"
                     type="number"
                     fullWidth
                     variant="standard"
@@ -423,7 +412,7 @@ export default function MovieDetail() {
                               },
                             }}
                           >
-                            <DialogTitle>Modify</DialogTitle>
+                            <DialogTitle>수정</DialogTitle>
                             <DialogContent>
                               <DialogContentText>
                                 수정할 내용을 작성해주세요
@@ -435,7 +424,7 @@ export default function MovieDetail() {
                                 margin="dense"
                                 id="grade"
                                 name="grade"
-                                label="New Grade"
+                                label="새로운 등급"
                                 type="number"
                                 fullWidth
                                 variant="standard"
@@ -448,7 +437,7 @@ export default function MovieDetail() {
                                 margin="dense"
                                 id="content"
                                 name="content"
-                                label="New Content"
+                                label="새로운 내용"
                                 type="text"
                                 fullWidth
                                 variant="standard"
@@ -487,7 +476,7 @@ export default function MovieDetail() {
                             aria-describedby="alert-dialog-description"
                           >
                             <DialogTitle id="alert-dialog-title">
-                              Delete
+                              삭제
                             </DialogTitle>
                             <DialogContent>
                               <DialogContentText id="alert-dialog-description">
