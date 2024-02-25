@@ -1,19 +1,29 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import RegisterForm from './RegisterForm';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import RegisterForm from "./RegisterForm";
 
 export default function Register() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (name, email, password, birth) => {
     try {
+      setLoading(true);
+      setError(null);
 
-      if (name.trim() === "" || email.trim() === "" || password.trim() === "" || birth.trim() === "") {
-        alert("Email address, password, name and birth cannot be empty!")
-        return
+      if (
+        name.trim() === "" ||
+        email.trim() === "" ||
+        password.trim() === "" ||
+        birth.trim() === ""
+      ) {
+        alert("Email address, password, name and birth cannot be empty!");
+        return;
       }
 
-      const response = await fetch("http://10.125.121.181:8080/member/join", {
+      // const response = await fetch("http://10.125.121.181:8080/member/join", {
+      const response = await fetch("http://localhost:8080/member/join", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,62 +32,25 @@ export default function Register() {
           name: name,
           email: email,
           password: password,
-          birth: birth
+          birth: birth,
         }),
       });
-      // json 형식이 아님
-      const data = await response.json();
-      console.log("res 결과", response)
-      console.log("데이터 결과", data)
 
-      if (data.status === 200) {
-        navigate("/Login"); // 회원가입 성공 시 로그인 페이지로 이동합니다.
-      } else {
-        console.error("회원가입 실패:", data.error);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to register.");
       }
+
+      navigate("/Login"); // 회원가입 성공 시 로그인 페이지로 이동합니다.
     } catch (error) {
-      console.log(error)
-      console.error('에러 발생:', error);
-      throw error; // 에러를 다시 던져서 상위 컴포넌트에서 처리할 수 있도록 합니다.
+      console.error("Registration failed:", error.message);
+      setError(error.message || "Registration failed. Please try again later.");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  return <RegisterForm onSubmit={handleSubmit} />;
+  return (
+    <RegisterForm onSubmit={handleSubmit} loading={loading} error={error} />
+  );
 }
-
-// import React from 'react'
-// import RegisterForm from './RegisterForm'
-
-// export default function Register() {
-
-//   const handleSubmit = (name, email, password, birth) => {
-
-//     if (name.trim() == "" || email.trim() == "" || password.trim() == "" || birth.trim() == "") {
-//       alert("Email address, password, name and birth cannot be empty!")
-//       return
-//     }
-
-//     fetch("http://10.125.121.181:8080/member/join", {
-//       method : "POST", 
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body : JSON.stringify({
-//         name : name,
-//         email : email,
-//         password : password,
-//         birth : birth
-//       }),
-//     })
-//     .then(res => {
-//       console.log(res)
-//       res.json()})
-//     .catch(err => console.log('에러 발생:', err))
-//   }
-
-//   return (
-//     <RegisterForm onSubmit={handleSubmit} />
-//   )
-// }
-
-

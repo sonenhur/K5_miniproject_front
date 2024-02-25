@@ -1,9 +1,7 @@
-import Main from "./UI/Main";
 import MainMenu from "./UI/MainMenu";
 import LoginForm from "./Component/LoginForm";
 import Register from "./Component/Register";
 import MovieDetail from "./Component/MovieDetail";
-import RegisterForm from "./Component/RegisterForm";
 
 import { RecoilRoot } from "recoil";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
