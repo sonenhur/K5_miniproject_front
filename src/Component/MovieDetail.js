@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { userEmail } from "./AtomSt";
 import { useRecoilState } from "recoil";
-
+import StarIcon from "@mui/icons-material/Star";
+//npm install @mui/icons-material
 import movie1 from "../assets/poster/wonka.jpg";
 import movie2 from "../assets/poster/gungook.jpg";
 import movie3 from "../assets/poster/qukal.jpg";
@@ -366,8 +367,16 @@ export default function MovieDetail() {
                           {getWriterId(rv.writer)}
                         </div>
                       </div>
-                      <div className="text-2xl font-bold text-center text-white mb-2">
-                        ⭐{rv.grade}
+                      <div
+                        className="text-2xl font-bold text-center text-white mb-2"
+                        style={{ whiteSpace: "nowrap" }}
+                      >
+                        {Array.from({ length: rv.grade }, (_, index) => (
+                          <StarIcon
+                            key={index}
+                            sx={{ color: "#FFD700", fontSize: 24 }}
+                          />
+                        ))}
                       </div>
                     </div>
                     <div className="text-lg font-medium text-white mb-4">
